@@ -1,0 +1,35 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:47921",
+      "sslPort": 44371
+    }
+  },
+  "profiles": {
+    "Characters.Api": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7218;http://localhost:5218",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TDG_Eventing__Source": "characters-api",
+        "TDG_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "TDG_Eventing__BrokerNamespace": "tdg",
+        "TDG_Eventing__BrokerName": "tdg-broker"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TDG_Eventing__Source": "characters-api",
+        "TDG_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "TDG_Eventing__BrokerNamespace": "tdg",
+        "TDG_Eventing__BrokerName": "tdg-broker"
+      }
+    }
+  }
+}

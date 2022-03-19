@@ -1,0 +1,38 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:12692",
+      "sslPort": 44317
+    }
+  },
+  "profiles": {
+    "DeadLetterSink": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7054;http://localhost:5054",
+      "environmentVariables": {
+        "SEQ_URL": "http://localhost:5341",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DLS_Eventing__Source": "deadletters",
+        "DLS_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "DLS_Eventing__BrokerNamespace": "tdg",
+        "DLS_Eventing__BrokerName": "tdg-broker"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "SEQ_URL": "http://localhost:5341",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DLS_Eventing__Source": "deadletters",
+        "DLS_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "DLS_Eventing__BrokerNamespace": "tdg",
+        "DLS_Eventing__BrokerName": "tdg-broker"
+      }
+    }
+  }
+}

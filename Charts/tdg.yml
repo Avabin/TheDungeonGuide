@@ -1,0 +1,147 @@
+﻿apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: characters-api
+  namespace: tdg
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: ghcr.io/avabin/characters-api:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://laptop-andrzej.lan:5341"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: TDG_Eventing__Source
+              value: "characters-api"
+            - name: TDG_Eventing__BrokerBaseUrl
+              value: "http://broker-ingress.knative-eventing.svc.cluster.local"
+            - name: TDG_Eventing__BrokerName
+              value: tdg-broker
+            - name: TDG_Eventing__BrokerNamespace
+              value: tdg
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    networking.knative.dev/visibility: cluster-local
+  name: characters-mongo
+  namespace: tdg
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: ghcr.io/avabin/characters-mongo:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://laptop-andrzej.lan:5341"
+            - name: TDG_Eventing__Source
+              value: "characters-persistence"
+            - name: TDG_Eventing__BrokerBaseUrl
+              value: "http://broker-ingress.knative-eventing.svc.cluster.local"
+            - name: TDG_Eventing__BrokerName
+              value: tdg-broker
+            - name: TDG_Eventing__BrokerNamespace
+              value: tdg
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: TDG_ConnectionStrings__Mongo
+              value: "mongodb://laptop-andrzej.lan:27017"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    networking.knative.dev/visibility: cluster-local
+  name: deadletters-sink
+  namespace: tdg
+spec:
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/avabin/deadletterssink:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://laptop-andrzej.lan:5341"
+            - name: DLS_Eventing__Source
+              value: "deadletters"
+            - name: DLS_Eventing__BrokerBaseUrl
+              value: "http://broker-ingress.knative-eventing.svc.cluster.local"
+            - name: DLS_Eventing__BrokerName
+              value: tdg-broker
+            - name: DLS_Eventing__BrokerNamespace
+              value: tdg
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: tdg-broker
+  namespace: tdg
+spec:
+  delivery:
+    retry: 5
+    backoffDelay: "PT5S"
+    deadLetterSink:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: deadletters-sink
+        namespace: tdg
+      uri: "/"
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: characters-mongo-trigger
+  namespace: tdg
+spec:
+  filter:
+    attributes:
+      subject: characters-persistence
+  broker: tdg-broker
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: characters-mongo
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: characters-api-trigger
+  namespace: tdg
+spec:
+  filter:
+    attributes:
+      subject: characters-api
+  broker: tdg-broker
+  delivery:
+    retry: 0
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: characters-api
+    uri: /events

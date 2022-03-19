@@ -1,0 +1,37 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:18112",
+      "sslPort": 44326
+    }
+  },
+  "profiles": {
+    "Characters.Mongo": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7079;http://localhost:5079",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TDG_ConnectionStrings__Mongo": "mongodb://localhost:27017",
+        "TDG_Eventing__Source": "characters-persistence",
+        "TDG_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "TDG_Eventing__BrokerNamespace": "tdg",
+        "TDG_Eventing__BrokerName": "tdg-broker"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TDG_ConnectionStrings__Mongo": "mongodb://localhost:27017",
+        "TDG_Eventing__Source": "characters-persistence",
+        "TDG_Eventing__BrokerBaseUrl": "http://localhost:6161",
+        "TDG_Eventing__BrokerNamespace": "tdg",
+        "TDG_Eventing__BrokerName": "tdg-broker"
+      }
+    }
+  }
+}
