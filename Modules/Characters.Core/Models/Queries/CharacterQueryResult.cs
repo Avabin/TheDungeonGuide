@@ -1,4 +1,4 @@
-﻿using EventHandler.Infrastructure.Features.Events;
+﻿using Functions.Infrastructure.Features.Events;
 
 namespace Characters.Core.Models.Queries;
 

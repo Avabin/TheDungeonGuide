@@ -17,6 +17,8 @@
       <ProjectReference Include="..\..\..\Modules\Characters.Core\Characters.Core.csproj" />
       <ProjectReference Include="..\..\..\Modules\EventHandler.Infrastructure\EventHandler.Infrastructure.csproj" />
       <ProjectReference Include="..\..\..\Modules\Mongo\Mongo.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Functions.Infrastructure\Functions.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Functions.Mongo\Functions.Mongo.csproj" />
     </ItemGroup>
 
 </Project>

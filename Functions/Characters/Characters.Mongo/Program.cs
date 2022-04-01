@@ -1,7 +1,6 @@
 // data service type alias
 
-global using DataService =
-    Mongo.DataService.IDataService<Characters.Core.Models.Commands.CreateCharacterCommand,
+global using DataService = Functions.Mongo.Features.DataService.IDataService<Characters.Core.Models.Commands.CreateCharacterCommand,
         Characters.Core.Models.Commands.UpdateCharacterCommand, Characters.Core.Models.Character,
         Characters.Mongo.Models.CharacterDocument>;
 using Characters.Core.Models;
@@ -10,9 +9,9 @@ using Characters.Core.Models.Queries;
 using Characters.Mongo.CommandHandlers;
 using Characters.Mongo.Models;
 using Characters.Mongo.QueryHandlers;
-using EventHandler.Infrastructure.Features;
-using EventHandler.Infrastructure.Features.Extensions;
-using Mongo;
+using Functions.Infrastructure.Features;
+using Functions.Infrastructure.Features.Extensions;
+using Functions.Mongo.Features;
 
 var builder = Function.CreateBuilder(args, "TDG_", "Characters.Mongo");
 builder.Services

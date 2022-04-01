@@ -1,5 +1,5 @@
 ﻿using Characters.Core.Models.Commands;
-using EventHandler.Infrastructure.Features.EventHandlers;
+using Functions.Infrastructure.Features.EventHandlers;
 
 namespace Characters.Mongo.CommandHandlers;
 

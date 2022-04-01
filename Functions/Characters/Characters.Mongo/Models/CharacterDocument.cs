@@ -1,5 +1,5 @@
 ﻿using Characters.Core.Models;
-using Mongo;
+using Functions.Mongo.Features;
 using MongoDB.Bson;
 
 namespace Characters.Mongo.Models;

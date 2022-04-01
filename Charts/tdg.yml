@@ -48,7 +48,7 @@ spec:
             - containerPort: 80
           env:
             - name: SEQ_URL
-              value: "http://laptop-andrzej.lan:5341"
+              value: "http://andrzej-pc.lan:5341"
             - name: TDG_Eventing__Source
               value: "characters-persistence"
             - name: TDG_Eventing__BrokerBaseUrl
@@ -62,7 +62,7 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
             - name: TDG_ConnectionStrings__Mongo
-              value: "mongodb://laptop-andrzej.lan:27017"
+              value: "mongodb://andrzej-pc.lan:27017"
 ---
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -80,7 +80,7 @@ spec:
             - containerPort: 80
           env:
             - name: SEQ_URL
-              value: "http://laptop-andrzej.lan:5341"
+              value: "http://andrzej-pc.lan:5341"
             - name: DLS_Eventing__Source
               value: "deadletters"
             - name: DLS_Eventing__BrokerBaseUrl

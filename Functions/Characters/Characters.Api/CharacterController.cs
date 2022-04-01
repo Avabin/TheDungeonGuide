@@ -1,6 +1,6 @@
 ﻿using Characters.Core.Models.Commands;
 using Characters.Core.Models.Queries;
-using EventHandler.Infrastructure.Features;
+using Functions.Infrastructure.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Characters.Api;

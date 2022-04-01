@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Functions.Infrastructure\Functions.Infrastructure.csproj" />
       <ProjectReference Include="..\EventHandler.Infrastructure\EventHandler.Infrastructure.csproj" />
     </ItemGroup>
 

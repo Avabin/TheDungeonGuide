@@ -1,5 +1,5 @@
-﻿using EventHandler.Infrastructure.Features.EventHandlers;
-using EventHandler.Infrastructure.Features.Events;
+﻿using Functions.Infrastructure.Features.EventHandlers;
+using Functions.Infrastructure.Features.Events;
 
 namespace DeadLetterSink;
 
