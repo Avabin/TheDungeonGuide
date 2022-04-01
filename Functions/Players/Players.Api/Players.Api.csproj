@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Modules\Players.Core\Players.Core.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Functions.Infrastructure\Functions.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

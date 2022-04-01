@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Modules\Characters.Core\Characters.Core.csproj" />
-      <ProjectReference Include="..\..\..\Modules\EventHandler.Infrastructure\EventHandler.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("Characters.Api", "Characters.Mongo", "DeadLetterSink", "All")]
+    [ValidateSet("Characters.Api", "Characters.Mongo", "DeadLetterSink", "Sessions.Api", "Sessions.Mongo", "Players.Api", "Players.Mongo", "All")]
     [string[]]$Services = @("All"),
     $imageTag = "latest"
 )
@@ -15,6 +15,26 @@ $servicesData = @(@{
     Dockerfile = "./Functions/Characters/Characters.Mongo/Dockerfile";
     ImageName = "ghcr.io/avabin/characters-mongo";
     FunctionName = "characters-mongo";
+},@{
+    Name = "Sessions.Api";
+    Dockerfile = "./Functions/Sessions/Sessions.Api/Dockerfile";
+    ImageName = "ghcr.io/avabin/sessions-api";
+    FunctionName = "sessions-api";
+},@{
+    Name = "Sessions.Mongo";
+    Dockerfile = "./Functions/Sessions/Sessions.Mongo/Dockerfile";
+    ImageName = "ghcr.io/avabin/sessions-mongo";
+    FunctionName = "sessions-mongo";
+},@{
+    Name = "Players.Api";
+    Dockerfile = "./Functions/Players/Players.Api/Dockerfile";
+    ImageName = "ghcr.io/avabin/players-api";
+    FunctionName = "players-api";
+},@{
+    Name = "Players.Mongo";
+    Dockerfile = "./Functions/Players/Players.Mongo/Dockerfile";
+    ImageName = "ghcr.io/avabin/players-mongo";
+    FunctionName = "players-mongo";
 },@{
     Name = "DeadLetterSink";
     Dockerfile = "./Functions/DeadLetterSink/Dockerfile";
@@ -69,7 +89,7 @@ task DeployDockerImages {
     foreach ($service in $servicesToDeploy) {
         Write-Host "Deploying docker image for $($service.Name)"
         $functionName = $service.FunctionName
-        exec {kn -n tdg service update $functionName --image="$($service.ImageName):$imageTag"}
+        exec {kn -n thedungeonguide service update $functionName --image="$($service.ImageName):$imageTag"}
     }
 }
 

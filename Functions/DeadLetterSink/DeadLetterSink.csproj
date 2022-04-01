@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Modules\EventHandler.Infrastructure\EventHandler.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Shared\Functions.Infrastructure\Functions.Infrastructure.csproj" />
     </ItemGroup>
 

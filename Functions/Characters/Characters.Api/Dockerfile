@@ -6,7 +6,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Functions/Characters/Characters.Api/Characters.Api.csproj", "./Functions/Characters/Characters.Api/"]
-COPY ["Modules/EventHandler.Infrastructure/EventHandler.Infrastructure.csproj", "./Modules/EventHandler.Infrastructure/"]
+COPY ["Shared/Functions.Infrastructure/Functions.Infrastructure.csproj", "./Shared/Functions.Infrastructure/"]
 COPY ["Modules/Characters.Core/Characters.Core.csproj", "./Modules/Characters.Core/"]
 RUN dotnet restore "Functions/Characters/Characters.Api/Characters.Api.csproj"
 COPY . .

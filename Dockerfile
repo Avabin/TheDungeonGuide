@@ -7,8 +7,8 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Functions/Characters/Characters.Mongo/Characters.Mongo.csproj", "./Functions/Characters/Characters.Mongo/"]
 COPY ["Modules/Characters.Core/Characters.Core.csproj", "./Modules/Characters.Core/"]
-COPY ["Modules/EventHandler.Infrastructure/EventHandler.Infrastructure.csproj", "./Modules/EventHandler.Infrastructure/"]
-COPY ["Modules/Mongo/Mongo.csproj", "./Modules/Mongo/"]
+COPY ["Shared/Functions.Infrastructure/Functions.Infrastructure.csproj", "./Shared/Functions.Infrastructure/"]
+COPY ["Shared/Functions.Mongo/Mongo.csproj", "./Shared/Functions.Mongo/"]
 RUN dotnet restore "Functions/Characters/Characters.Mongo/Characters.Mongo.csproj"
 COPY . .
 WORKDIR "/src/Functions/Characters/Characters.Mongo"

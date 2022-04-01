@@ -1,8 +1,147 @@
-﻿apiVersion: serving.knative.dev/v1
+﻿apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    networking.knative.dev/enabledWildcardCert: "true"
+  name: "thedungeonguide"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: players-api
+  namespace: "thedungeonguide"
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: ghcr.io/avabin/players-api:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://seq.apps:5341"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: TDG_Eventing__Source
+              value: "players-api"
+            - name: TDG_Eventing__BrokerBaseUrl
+              value: "http://kafka-broker-ingress.knative-eventing"
+            - name: TDG_Eventing__BrokerName
+              value: "tdg-broker"
+            - name: TDG_Eventing__BrokerNamespace
+              value: "thedungeonguide"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    networking.knative.dev/visibility: cluster-local
+  name: players-mongo
+  namespace: "thedungeonguide"
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: ghcr.io/avabin/sessions-mongo:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://seq.apps:5341"
+            - name: TDG_Eventing__Source
+              value: "players-persistence"
+            - name: TDG_Eventing__BrokerBaseUrl
+              value: "http://kafka-broker-ingress.knative-eventing"
+            - name: TDG_Eventing__BrokerName
+              value: "tdg-broker"
+            - name: TDG_Eventing__BrokerNamespace
+              value: "thedungeonguide"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: TDG_ConnectionStrings__Mongo
+              value: "mongodb://andrzej-pc.lan:27017"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sessions-api
+  namespace: "thedungeonguide"
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: ghcr.io/avabin/sessions-api:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://seq.apps:5341"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: TDG_Eventing__Source
+              value: "sessions-api"
+            - name: TDG_Eventing__BrokerBaseUrl
+              value: "http://kafka-broker-ingress.knative-eventing"
+            - name: TDG_Eventing__BrokerName
+              value: "tdg-broker"
+            - name: TDG_Eventing__BrokerNamespace
+              value: "thedungeonguide"
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    networking.knative.dev/visibility: cluster-local
+  name: sessions-mongo
+  namespace: "thedungeonguide"
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+        - image: ghcr.io/avabin/sessions-mongo:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SEQ_URL
+              value: "http://seq.apps:5341"
+            - name: TDG_Eventing__Source
+              value: "sessions-persistence"
+            - name: TDG_Eventing__BrokerBaseUrl
+              value: "http://kafka-broker-ingress.knative-eventing"
+            - name: TDG_Eventing__BrokerName
+              value: "tdg-broker"
+            - name: TDG_Eventing__BrokerNamespace
+              value: "thedungeonguide"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: TDG_ConnectionStrings__Mongo
+              value: "mongodb://andrzej-pc.lan:27017"
+---
+apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: characters-api
-  namespace: tdg
+  namespace: "thedungeonguide"
 spec:
   template:
     metadata:
@@ -15,7 +154,7 @@ spec:
             - containerPort: 80
           env:
             - name: SEQ_URL
-              value: "http://laptop-andrzej.lan:5341"
+              value: "http://seq.apps:5341"
             - name: ASPNETCORE_URLS
               value: "http://0.0.0.0:80"
             - name: ASPNETCORE_ENVIRONMENT
@@ -23,11 +162,11 @@ spec:
             - name: TDG_Eventing__Source
               value: "characters-api"
             - name: TDG_Eventing__BrokerBaseUrl
-              value: "http://broker-ingress.knative-eventing.svc.cluster.local"
+              value: "http://kafka-broker-ingress.knative-eventing"
             - name: TDG_Eventing__BrokerName
-              value: tdg-broker
+              value: "tdg-broker"
             - name: TDG_Eventing__BrokerNamespace
-              value: tdg
+              value: "thedungeonguide"
 ---
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -35,7 +174,7 @@ metadata:
   labels:
     networking.knative.dev/visibility: cluster-local
   name: characters-mongo
-  namespace: tdg
+  namespace: "thedungeonguide"
 spec:
   template:
     metadata:
@@ -48,15 +187,15 @@ spec:
             - containerPort: 80
           env:
             - name: SEQ_URL
-              value: "http://andrzej-pc.lan:5341"
+              value: "http://seq.apps:5341"
             - name: TDG_Eventing__Source
               value: "characters-persistence"
             - name: TDG_Eventing__BrokerBaseUrl
-              value: "http://broker-ingress.knative-eventing.svc.cluster.local"
+              value: "http://kafka-broker-ingress.knative-eventing"
             - name: TDG_Eventing__BrokerName
-              value: tdg-broker
+              value: "tdg-broker"
             - name: TDG_Eventing__BrokerNamespace
-              value: tdg
+              value: "thedungeonguide"
             - name: ASPNETCORE_URLS
               value: "http://0.0.0.0:80"
             - name: ASPNETCORE_ENVIRONMENT
@@ -70,25 +209,25 @@ metadata:
   labels:
     networking.knative.dev/visibility: cluster-local
   name: deadletters-sink
-  namespace: tdg
+  namespace: "thedungeonguide"
 spec:
   template:
     spec:
       containers:
-        - image: ghcr.io/avabin/deadletterssink:latest
+        - image: ghcr.io/avabin/deadlettersink:latest
           ports:
             - containerPort: 80
           env:
             - name: SEQ_URL
-              value: "http://andrzej-pc.lan:5341"
+              value: "http://seq.apps:5341"
             - name: DLS_Eventing__Source
               value: "deadletters"
             - name: DLS_Eventing__BrokerBaseUrl
-              value: "http://broker-ingress.knative-eventing.svc.cluster.local"
+              value: "http://kafka-broker-ingress.knative-eventing"
             - name: DLS_Eventing__BrokerName
-              value: tdg-broker
+              value: "tdg-broker"
             - name: DLS_Eventing__BrokerNamespace
-              value: tdg
+              value: "thedungeonguide"
             - name: ASPNETCORE_URLS
               value: "http://0.0.0.0:80"
             - name: ASPNETCORE_ENVIRONMENT
@@ -97,8 +236,8 @@ spec:
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
-  name: tdg-broker
-  namespace: tdg
+  name: "tdg-broker"
+  namespace: "thedungeonguide"
 spec:
   delivery:
     retry: 5
@@ -108,19 +247,21 @@ spec:
         apiVersion: serving.knative.dev/v1
         kind: Service
         name: deadletters-sink
-        namespace: tdg
+        namespace: "thedungeonguide"
       uri: "/"
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: characters-mongo-trigger
-  namespace: tdg
+  namespace: "thedungeonguide"
+  annotations:
+    kafka.eventing.knative.dev/delivery.order: ordered
 spec:
   filter:
     attributes:
       subject: characters-persistence
-  broker: tdg-broker
+  broker: "tdg-broker"
   subscriber:
     ref:
       apiVersion: serving.knative.dev/v1
@@ -131,12 +272,12 @@ apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
   name: characters-api-trigger
-  namespace: tdg
+  namespace: "thedungeonguide"
 spec:
   filter:
     attributes:
       subject: characters-api
-  broker: tdg-broker
+  broker: "tdg-broker"
   delivery:
     retry: 0
   subscriber:
@@ -144,4 +285,78 @@ spec:
       apiVersion: serving.knative.dev/v1
       kind: Service
       name: characters-api
+    uri: /events
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: characters-mongo-trigger
+  namespace: "thedungeonguide"
+  annotations:
+    kafka.eventing.knative.dev/delivery.order: ordered
+spec:
+  filter:
+    attributes:
+      subject: sessions-persistence
+  broker: "tdg-broker"
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: sessions-mongo
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: sessions-api-trigger
+  namespace: "thedungeonguide"
+spec:
+  filter:
+    attributes:
+      subject: sessions-api
+  broker: "tdg-broker"
+  delivery:
+    retry: 0
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: sessions-api
+    uri: /events
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: characters-mongo-trigger
+  namespace: "thedungeonguide"
+  annotations:
+    kafka.eventing.knative.dev/delivery.order: ordered
+spec:
+  filter:
+    attributes:
+      subject: sessions-persistence
+  broker: "tdg-broker"
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: sessions-mongo
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: players-api-trigger
+  namespace: "thedungeonguide"
+spec:
+  filter:
+    attributes:
+      subject: players-api
+  broker: "tdg-broker"
+  delivery:
+    retry: 0
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: players-api
     uri: /events

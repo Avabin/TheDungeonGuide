@@ -1,6 +1,8 @@
-﻿namespace Sessions.Core.Models.Queries;
+﻿using Functions.Infrastructure.Features.Events;
 
-public class GetSessionsQuery
+namespace Sessions.Core.Models.Queries;
+
+public class GetSessionsQuery : IQuery
 {
     public Guid CorrelationId { get; set; } = Guid.NewGuid();
     public int? Skip          { get; set; }

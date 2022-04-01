@@ -6,7 +6,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Functions/DeadLetterSink/DeadLetterSink.csproj", "./Functions/DeadLetterSink/"]
-COPY ["Modules/EventHandler.Infrastructure/EventHandler.Infrastructure.csproj", "./Modules/EventHandler.Infrastructure/"]
+COPY ["Shared/Functions.Infrastructure/Functions.Infrastructure.csproj", "./Shared/Functions.Infrastructure/"]
 RUN dotnet restore "Functions/DeadLetterSink/DeadLetterSink.csproj"
 COPY . .
 WORKDIR "/src/Functions/DeadLetterSink"

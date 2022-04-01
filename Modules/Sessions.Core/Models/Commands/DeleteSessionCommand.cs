@@ -1,6 +1,8 @@
-﻿namespace Sessions.Core.Models.Commands;
+﻿using Functions.Infrastructure.Features.Events;
 
-public class DeleteSessionCommand
+namespace Sessions.Core.Models.Commands;
+
+public class DeleteSessionCommand : ICommand
 {
     public string Id            { get; set; } = "";
     public Guid   CorrelationId { get; set; } = Guid.NewGuid();
