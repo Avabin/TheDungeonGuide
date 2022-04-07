@@ -8,4 +8,7 @@ public class GetPlayersQuery : IQuery
 
     public int? Skip { get; set; }
     public int? Take { get; set; }
+        
+    public string ApiKey { get; set; } = "";
+    
 }

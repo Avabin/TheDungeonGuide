@@ -4,6 +4,8 @@ namespace Sessions.Core.Models.Queries;
 
 public class SessionQueryResult : IEvent
 {
-    public Guid CorrelationId { get; set; } = Guid.NewGuid();
-    public List<Session> Sessions { get; set; } = new();
+    public Guid          CorrelationId { get; set; } = Guid.NewGuid();
+    public List<Session> Sessions      { get; set; } = new();
+    public string        ApiKey        { get; set; } = "";
+    
 }

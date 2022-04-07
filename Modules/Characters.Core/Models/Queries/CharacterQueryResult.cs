@@ -6,4 +6,5 @@ public class CharacterQueryResult : IEvent
 {
     public Guid            CorrelationId { get; set; } = Guid.NewGuid();
     public List<Character> Characters    { get; set; } = new();
+    public string          ApiKey        { get; set; } = "";
 }
