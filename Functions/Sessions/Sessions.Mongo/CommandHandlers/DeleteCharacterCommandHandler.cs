@@ -11,5 +11,5 @@ public class DeleteSessionCommandHandler : IEventHandler<DeleteSessionCommand>
         _dataService = dataService;
 
     public async Task Handle(DeleteSessionCommand @event) => 
-        await _dataService.Delete(@event.Id);
+        await _dataService.DeleteAsync(@event.Id);
 }

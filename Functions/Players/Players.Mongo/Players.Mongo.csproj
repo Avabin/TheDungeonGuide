@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Modules\Players.Core\Players.Core.csproj" />
+      <ProjectReference Include="..\..\..\Modules\Players.Mongo.Core\Players.Mongo.Core.csproj" />
       <ProjectReference Include="..\..\..\Shared\Functions.Infrastructure\Functions.Infrastructure.csproj" />
       <ProjectReference Include="..\..\..\Shared\Functions.Mongo\Functions.Mongo.csproj" />
     </ItemGroup>

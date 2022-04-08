@@ -1,6 +1,8 @@
-﻿namespace Players.Core.Models;
+﻿using Functions.Mongo.Features;
 
-public class Player : PlayerBase
+namespace Players.Core.Models;
+
+public class Player : PlayerBase, IDocument<string>
 {
     public string Id { get; set; } = "";
 }

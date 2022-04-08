@@ -18,7 +18,7 @@ public class GetCharactersQueryHandler : IEventHandler<GetCharactersQuery>
 
     public async Task Handle(GetCharactersQuery @event)
     {
-        var chars = await _dataService.ReadAll(@event.Skip, @event.Take);
+        var chars = await _dataService.FindAllAsync(@event.Skip, @event.Take);
 
         var response = new CharacterQueryResult
         {

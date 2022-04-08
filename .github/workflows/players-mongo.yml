@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ master ]
+    paths:
+      - Functions/Players/Players.Mongo
+      - .github/workflows/players-mongo.yml
+      - Shared
+      - Modules/Players.Core
   pull_request:
     branches: [ master ]
 

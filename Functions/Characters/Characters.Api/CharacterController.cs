@@ -1,11 +1,13 @@
 ﻿using Characters.Core.Models.Commands;
 using Characters.Core.Models.Queries;
 using Functions.Infrastructure.Features;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Characters.Api;
 
 [Route("/")]
+[Authorize(Roles = "gm")]
 public class CharacterController : ControllerBase
 {
     private readonly IEventingService _eventingService;
@@ -14,7 +16,15 @@ public class CharacterController : ControllerBase
     {
         _eventingService = eventingService;
     }
+    
+    [HttpGet("headers")]
+    public IActionResult GetRequestHeaders()
+    {
+        var headers = Request.Headers.Select(x => new { Name = x.Key, x.Value });
+        return Ok(new {Headers = headers});
+    }
 
+    [Authorize(Roles = "player,gm")]
     [HttpGet]
     public async Task<IActionResult> Get()
     {

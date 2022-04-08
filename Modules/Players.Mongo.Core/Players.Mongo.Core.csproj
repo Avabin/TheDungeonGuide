@@ -7,8 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Shared\Functions.Infrastructure\Functions.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Shared\Functions.Mongo\Functions.Mongo.csproj" />
+      <ProjectReference Include="..\Players.Core\Players.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     </ItemGroup>
 
 </Project>

@@ -1,10 +1,11 @@
 ﻿using Functions.Infrastructure.Features;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Players.Core.Models.Commands;
 using Players.Core.Models.Queries;
 
 namespace Players.Api;
-
+[Authorize(Roles = "gm")]
 [Route("/")]
 public class PlayerController : ControllerBase
 {
@@ -13,6 +14,22 @@ public class PlayerController : ControllerBase
     public PlayerController(IEventingService eventingService)
     {
         _eventingService = eventingService;
+    }
+    
+    [Authorize(Roles = "player")]
+    [HttpGet]
+    public async Task<IActionResult> GetMe()
+    {
+        var username = User.Identity.Name;
+        if (!string.IsNullOrEmpty(username)) return NotFound(new { message = "User not found" });
+        
+        var result = await _eventingService.QueryAsync<PlayerQueryResult>(new GetPlayerQuery(), EventTargets.PlayersDb);
+        var player = result.Players.SingleOrDefault();
+
+        
+        if (player == null) return NotFound(new { message = "Player not found" });
+
+        return Ok(player);
     }
 
     [HttpGet]

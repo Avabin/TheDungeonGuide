@@ -12,5 +12,5 @@ public class UpdateSessionCommandHandler : IEventHandler<UpdateSessionCommand>
         _dataService = dataService;
     }
     public async Task Handle(UpdateSessionCommand @event) => 
-        await _dataService.Update(@event.Id, @event);
+        await _dataService.UpdateAsync(@event.Id, @event);
 }

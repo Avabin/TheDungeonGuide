@@ -18,7 +18,7 @@ public class GetSessionsQueryHandler : IEventHandler<GetSessionsQuery>
 
     public async Task Handle(GetSessionsQuery @event)
     {
-        var chars = await _dataService.ReadAll(@event.Skip, @event.Take);
+        var chars = await _dataService.FindAllAsync(@event.Skip, @event.Take);
 
         var response = new SessionQueryResult
         {

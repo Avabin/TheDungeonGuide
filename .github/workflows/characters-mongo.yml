@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ master ]
+    paths:
+      - Functions/Characters/Characters.Mongo
+      - .github/workflows/characters-mongo.yml
+      - Shared
+      - Modules/Characters.Core
   pull_request:
     branches: [ master ]
 

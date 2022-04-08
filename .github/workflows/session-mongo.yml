@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ master ]
+    paths:
+      - Functions/Sessions/Sessions.Mongo
+      - .github/workflows/sessions-mongo.yml
+      - Shared
+      - Modules/Sessions.Core
   pull_request:
     branches: [ master ]
 

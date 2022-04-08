@@ -1,16 +1,17 @@
 ﻿using Players.Core.Models.Commands;
 using Functions.Infrastructure.Features.EventHandlers;
+using Players.Mongo.Core.Services;
 
 namespace Players.Mongo.CommandHandlers;
 
 public class UpdatePlayerCommandHandler : IEventHandler<UpdatePlayerCommand>
 {
-    private readonly DataService _dataService;
+    private readonly IPlayersDataService _dataService;
 
-    public UpdatePlayerCommandHandler(DataService dataService)
+    public UpdatePlayerCommandHandler(IPlayersDataService dataService)
     {
         _dataService = dataService;
     }
     public async Task Handle(UpdatePlayerCommand @event) => 
-        await _dataService.Update(@event.Id, @event);
+        await _dataService.UpdateAsync(@event.Id, @event);
 }

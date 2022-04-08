@@ -11,5 +11,5 @@ public class CreateCharacterCommandHandler : IEventHandler<CreateCharacterComman
         _dataService = dataService;
 
     public async Task Handle(CreateCharacterCommand @event) => 
-        await _dataService.Create(@event);
+        await _dataService.InsertAsync(@event);
 }

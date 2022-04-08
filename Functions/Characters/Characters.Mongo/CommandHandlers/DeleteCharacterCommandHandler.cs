@@ -11,5 +11,5 @@ public class DeleteCharacterCommandHandler : IEventHandler<DeleteCharacterComman
         _dataService = dataService;
 
     public async Task Handle(DeleteCharacterCommand @event) => 
-        await _dataService.Delete(@event.Id);
+        await _dataService.DeleteAsync(@event.Id);
 }

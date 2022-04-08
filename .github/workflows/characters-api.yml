@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ master ]
+    paths:
+      - Functions/Characters/Characters.Api
+      - .github/workflows/characters-api.yml
+      - Shared
+      - Modules/Characters.Core
   pull_request:
     branches: [ master ]
 

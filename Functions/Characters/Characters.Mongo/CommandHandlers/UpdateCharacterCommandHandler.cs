@@ -12,5 +12,5 @@ public class UpdateCharacterCommandHandler : IEventHandler<UpdateCharacterComman
         _dataService = dataService;
     }
     public async Task Handle(UpdateCharacterCommand @event) => 
-        await _dataService.Update(@event.Id, @event);
+        await _dataService.UpdateAsync(@event.Id, @event);
 }

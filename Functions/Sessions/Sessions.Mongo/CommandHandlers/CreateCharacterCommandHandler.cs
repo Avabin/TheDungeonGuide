@@ -11,5 +11,5 @@ public class CreateSessionCommandHandler : IEventHandler<CreateSessionCommand>
         _dataService = dataService;
 
     public async Task Handle(CreateSessionCommand @event) => 
-        await _dataService.Create(@event);
+        await _dataService.InsertAsync(@event);
 }
