@@ -17,7 +17,7 @@ public class PlayerController : ControllerBase
     }
     
     [Authorize(Roles = "player")]
-    [HttpGet]
+    [HttpGet("me")]
     public async Task<IActionResult> GetMe()
     {
         var username = User.Identity.Name;
