@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+﻿FROM ghcr.io/avabin/aspnet:latest AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -11,10 +11,10 @@ COPY ["Modules/Characters.Core/Characters.Core.csproj", "./Modules/Characters.Co
 RUN dotnet restore "Functions/Characters/Characters.Api/Characters.Api.csproj"
 COPY . .
 WORKDIR "/src/Functions/Characters/Characters.Api"
-RUN dotnet build "Characters.Api.csproj" -c Release -o /app/build
+RUN dotnet build "Characters.Api.csproj" -c Debug -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Characters.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Characters.Api.csproj" -c Debug -o /app/publish
 
 FROM base AS final
 WORKDIR /app
