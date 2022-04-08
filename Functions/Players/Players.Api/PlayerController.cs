@@ -20,14 +20,14 @@ public class PlayerController : ControllerBase
     [HttpGet("me")]
     public async Task<IActionResult> GetMe()
     {
-        var username = User.Identity.Name;
-        if (!string.IsNullOrEmpty(username)) return NotFound(new { message = "User not found" });
+        var username = User.Claims.SingleOrDefault(x => x.Type == "preferred_username")?.Value;
+        if (string.IsNullOrEmpty(username)) return NotFound(new { message = "User not found" });
         
         var result = await _eventingService.QueryAsync<PlayerQueryResult>(new GetPlayerQuery(), EventTargets.PlayersDb);
         var player = result.Players.SingleOrDefault();
 
         
-        if (player == null) return NotFound(new { message = "Player not found" });
+        if (player is null) return NotFound(new { message = "Player not found" });
 
         return Ok(player);
     }

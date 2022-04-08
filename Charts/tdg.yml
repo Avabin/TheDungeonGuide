@@ -1,6 +1,8 @@
 ﻿apiVersion: v1
 kind: Namespace
 metadata:
+  annotations:
+    autoscaling.knative.dev/min-scale: "1"
   labels:
     networking.knative.dev/enabledWildcardCert: "true"
   name: "thedungeonguide"
@@ -21,6 +23,10 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: JWT_AUTHORITY
+              value: "https://keycloak.avabin.xyz/realms/master"
+            - name: JWT_AUDIENCE
+              value: "root"
             - name: SEQ_URL
               value: "http://seq.apps:5341"
             - name: ASPNETCORE_URLS
@@ -87,6 +93,10 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: JWT_AUTHORITY
+              value: "https://keycloak.avabin.xyz/realms/master"
+            - name: JWT_AUDIENCE
+              value: "root"
             - name: SEQ_URL
               value: "http://seq.apps:5341"
             - name: ASPNETCORE_URLS
@@ -153,6 +163,10 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: JWT_AUTHORITY
+              value: "https://keycloak.avabin.xyz/realms/master"
+            - name: JWT_AUDIENCE
+              value: "root"
             - name: SEQ_URL
               value: "http://seq.apps:5341"
             - name: ASPNETCORE_URLS

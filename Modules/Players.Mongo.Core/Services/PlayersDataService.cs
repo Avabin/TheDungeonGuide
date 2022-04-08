@@ -1,6 +1,5 @@
 using AutoMapper;
 using Functions.Mongo.Features.DataService;
-using Functions.Mongo.Features.DataSource;
 using Microsoft.Extensions.Logging;
 using Players.Core.Models;
 using Players.Core.Models.Commands;

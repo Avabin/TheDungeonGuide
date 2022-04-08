@@ -22,6 +22,7 @@ public class GetPlayerQueryHandler : IEventHandler<GetPlayerQuery>
 
         var response = new PlayerQueryResult
         {
+            CorrelationId = @event.CorrelationId,
             Players = player is null ? Enumerable.Empty<Player>() : new[] { player }
         };
 

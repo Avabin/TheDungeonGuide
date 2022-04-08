@@ -3,7 +3,6 @@ using Functions.Mongo.Features.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Players.Core.Models;
 using Players.Mongo.Core.Models;
 
 namespace Players.Mongo.Core.Services;

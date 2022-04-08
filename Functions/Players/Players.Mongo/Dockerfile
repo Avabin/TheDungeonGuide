@@ -8,6 +8,7 @@ WORKDIR /src
 COPY ["Functions/Players/Players.Mongo/Players.Mongo.csproj", "./Functions/Players/Players.Mongo/"]
 COPY ["Shared/Functions.Infrastructure/Functions.Infrastructure.csproj", "./Shared/Functions.Infrastructure/"]
 COPY ["Modules/Players.Core/Players.Core.csproj", "./Modules/Players.Core/"]
+COPY ["Modules/Players.Mongo.Core/Players.Mongo.Core.csproj", "./Modules/Players.Mongo.Core/"]
 COPY ["Shared/Functions.Mongo/Functions.Mongo.csproj", "./Shared/Functions.Mongo/"]
 RUN dotnet restore "Functions/Players/Players.Mongo/Players.Mongo.csproj"
 COPY . .
