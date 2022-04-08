@@ -5,10 +5,10 @@ on:
   push:
     branches: [ master ]
     paths:
-      - Functions/Players/Players.Api
+      - 'Functions/Players/Players.Api/**'
       - .github/workflows/players-api.yml
-      - Shared
-      - Modules/Players.Core
+      - 'Shared/**'
+      - 'Modules/Players.Core/**'
   pull_request:
     branches: [ master ]
 

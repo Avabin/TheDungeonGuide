@@ -1,14 +1,14 @@
-name: Docker Characters Api image
+name: Docker Sessions Mongo image
 
 on:
   workflow_dispatch:
   push:
     branches: [ master ]
     paths:
-      - 'Functions/Characters/Characters.Api/**'
-      - .github/workflows/characters-api.yml
-      - 'Shared/**'
-      - 'Modules/Characters.Core/**'
+      - Functions/Sessions/Sessions.Mongo/**
+      - .github/workflows/sessions-mongo.yml
+      - Shared/**
+      - Modules/Sessions.Core/**
   pull_request:
     branches: [ master ]
 
@@ -51,12 +51,11 @@ jobs:
       with:
         context: .
         builder: ${{ steps.buildx.outputs.name }}
-        file: Functions/Characters/Characters.Api/Dockerfile
-        tags: ghcr.io/avabin/characters-api:latest
+        file: Functions/Sessions/Sessions.Mongo/Dockerfile
+        tags: ghcr.io/avabin/sessions-mongo:latest
         push: true
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-        
     - name: Deploy
       # You may pin to the exact commit or the version.
       # uses: D3rHase/ssh-command-action@3d8a11a6823dfe94f4fae068e6fc8b8f3d038c62
@@ -72,8 +71,7 @@ jobs:
         PRIVATE_SSH_KEY: ${{ secrets.DEPLOY_KEY }}
         # command to be executed
         COMMAND: |
-          /usr/local/bin/kn services -n thedungeonguide update characters-api --image=ghcr.io/avabin/characters-api:latest
-
+          /usr/local/bin/kn services -n thedungeonguide update sessions-mongo --image=ghcr.io/avabin/sessions-mongo:latest
     - name: Move cache
       run: |
         rm -rf /tmp/.buildx-cache

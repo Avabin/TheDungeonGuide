@@ -5,10 +5,10 @@ on:
   push:
     branches: [ master ]
     paths:
-      - Functions/Sessions/Sessions.Api
+      - Functions/Sessions/Sessions.Api/**
       - .github/workflows/sessions-api.yml
-      - Shared
-      - Modules/Sessions.Core
+      - Shared/**
+      - Modules/Sessions.Core/**
   pull_request:
     branches: [ master ]
 

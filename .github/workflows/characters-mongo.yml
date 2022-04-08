@@ -5,10 +5,10 @@ on:
   push:
     branches: [ master ]
     paths:
-      - Functions/Characters/Characters.Mongo
+      - Functions/Characters/Characters.Mongo/**
       - .github/workflows/characters-mongo.yml
-      - Shared
-      - Modules/Characters.Core
+      - Shared/**
+      - Modules/Characters.Core/**
   pull_request:
     branches: [ master ]
 
