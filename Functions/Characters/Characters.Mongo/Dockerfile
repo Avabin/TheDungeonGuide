@@ -1,7 +1,5 @@
 ﻿FROM ghcr.io/avabin/aspnet:latest AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src

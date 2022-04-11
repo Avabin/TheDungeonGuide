@@ -14,14 +14,24 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7211;http://localhost:5211",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TDG_ConnectionStrings__Mongo": "mongodb://localhost:27017",
+        "TDG_Eventing__Source": "sessions-persistence",
+        "TDG_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "TDG_Eventing__BrokerNamespace": "tdg",
+        "TDG_Eventing__BrokerName": "tdg-broker"
       }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "TDG_ConnectionStrings__Mongo": "mongodb://localhost:27017",
+        "TDG_Eventing__Source": "sessions-persistence",
+        "TDG_Eventing__BrokerBaseUrl": "https://050cca8f-bc96-40ac-bed4-4d3c5d8239ab.mock.pstmn.io",
+        "TDG_Eventing__BrokerNamespace": "tdg",
+        "TDG_Eventing__BrokerName": "tdg-broker"
       }
     }
   }
