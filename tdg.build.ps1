@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("Characters.Api", "Characters.Mongo", "DeadLetterSink", "Sessions.Api", "Sessions.Mongo", "Players.Api", "Players.Mongo", "All")]
+    [ValidateSet("Characters.Api", "Characters.Mongo", "DeadLetterSink", "Sessions.Api", "Sessions.Mongo", "Players.Api", "Players.Mongo", "Dices","All")]
     [string[]]$Services = @("All"),
     $imageTag = "latest"
 )
@@ -41,12 +41,13 @@ $servicesData = @(@{
     ImageName = "ghcr.io/avabin/deadlettersink";
     FunctionName = "deadletters-sink";
 }
-#,@{
-#    Name = "Sessions.Api";
-#    Dockerfile = "./Functions/Sessions/Sessions.Api/Dockerfile";
-#    ImageName = "ghcr.io/avabin/sessions-api";
-#    FunctionName = "sessions-api";
-#}, @{
+,@{
+    Name = "Dices";
+    Dockerfile = "./Functions/Dices.Api/Dockerfile";
+    ImageName = "ghcr.io/avabin/dices";
+    FunctionName = "dices";
+}
+#, @{
 #    Name = "Sessions.Mongo";
 #    Dockerfile = "./Functions/Sessions/Sessions.Mongo/Dockerfile";
 #    ImageName = "ghcr.io/avabin/sessions-mongo";

@@ -40,8 +40,8 @@
         {
             "label": "bridge-to-kubernetes.resource",
             "type": "bridge-to-kubernetes.resource",
-            "resource": "characters-api-00029-private",
-            "resourceType": "service",
+            "resource": "characters-api-00030-deployment-5bfcfcb54f-hv8tx",
+            "resourceType": "pod",
             "ports": [
                 5001
             ],

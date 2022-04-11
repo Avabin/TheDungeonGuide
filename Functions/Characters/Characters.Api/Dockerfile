@@ -19,4 +19,4 @@ RUN dotnet publish "Characters.Api.csproj" -c Debug -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Characters.Api.dll"]
+ENTRYPOINT ["/bin/sh", "-c", "sudo /etc/init.d/sshd start && dotnet Characters.Api.dll"]
