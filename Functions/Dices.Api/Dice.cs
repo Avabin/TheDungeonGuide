@@ -7,7 +7,7 @@ public class Dice
 {
     private const  string DiceGroupName  = "dice";
     private const  string CountGroupName = "count";
-    private static Regex  _regex         = new($@"^(?<{CountGroupName}>\d*)k(?<{DiceGroupName}>\d*)$");
+    private static Regex  _regex         = new($@"^(?<{CountGroupName}>\d*)d(?<{DiceGroupName}>\d*)$");
     
     public int Count { get; }
     public int Value { get; }
